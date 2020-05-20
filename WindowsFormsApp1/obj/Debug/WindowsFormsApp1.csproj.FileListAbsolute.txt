@@ -1,0 +1,8 @@
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe.config
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.exe
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\bin\Debug\WindowsFormsApp1.pdb
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csprojAssemblyReference.cache
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.Properties.Resources.resources
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.csproj.GenerateResource.cache
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.exe
+C:\Algoritmia\Proyecto Algoritmia\WindowsFormsApp1\obj\Debug\WindowsFormsApp1.pdb
