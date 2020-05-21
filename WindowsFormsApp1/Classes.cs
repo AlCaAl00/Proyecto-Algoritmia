@@ -37,7 +37,7 @@ namespace WindowsFormsApp1
             IVertexList[1].AddEdge(new Edge(503, IVertexList[3]));
 
             // Italia 2
-            IVertexList[2].AddEdge(new Edge(800, IVertexList[1]));
+            IVertexList[2].AddEdge(new Edge(956, IVertexList[1]));
             IVertexList[2].AddEdge(new Edge(646, IVertexList[4]));
 
             //Belgica 3
@@ -78,9 +78,6 @@ namespace WindowsFormsApp1
         {
             get { return this.IVertexList; }
         }
-
-        
-
     }
 
     public class Vertex

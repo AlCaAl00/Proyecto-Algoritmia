@@ -12,17 +12,12 @@ namespace WindowsFormsApp1
 {
     public partial class MainWindow : Form
     {
-        //Alex
         GraphTrain Graph;
         Vertex InitialVertex;
         Vertex DestinationVertex;
         Bitmap ImagenOriginal;
         Bitmap Temp;
         Dijkstra Dijkstra;
-        //Bitmap BitmapGraph;
-        //Santi
-        //bool cambio;
-        //List<int> enteros;
 
         public MainWindow()
         {

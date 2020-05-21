@@ -36,6 +36,7 @@
             this.buttonDijkstra = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.button1 = new System.Windows.Forms.Button();
+            this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
@@ -53,7 +54,7 @@
             // 
             this.Label_Destination.AutoSize = true;
             this.Label_Destination.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.Label_Destination.Location = new System.Drawing.Point(859, 172);
+            this.Label_Destination.Location = new System.Drawing.Point(859, 227);
             this.Label_Destination.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.Label_Destination.Name = "Label_Destination";
             this.Label_Destination.Size = new System.Drawing.Size(92, 25);
@@ -64,7 +65,7 @@
             // 
             this.combobox_origin.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combobox_origin.FormattingEnabled = true;
-            this.combobox_origin.Location = new System.Drawing.Point(844, 108);
+            this.combobox_origin.Location = new System.Drawing.Point(844, 73);
             this.combobox_origin.Margin = new System.Windows.Forms.Padding(2);
             this.combobox_origin.Name = "combobox_origin";
             this.combobox_origin.Size = new System.Drawing.Size(124, 21);
@@ -74,7 +75,7 @@
             // 
             this.combobox_destination.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.combobox_destination.FormattingEnabled = true;
-            this.combobox_destination.Location = new System.Drawing.Point(844, 199);
+            this.combobox_destination.Location = new System.Drawing.Point(844, 254);
             this.combobox_destination.Margin = new System.Windows.Forms.Padding(2);
             this.combobox_destination.Name = "combobox_destination";
             this.combobox_destination.Size = new System.Drawing.Size(124, 21);
@@ -82,12 +83,13 @@
             // 
             // buttonDijkstra
             // 
+            this.buttonDijkstra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.buttonDijkstra.Image = ((System.Drawing.Image)(resources.GetObject("buttonDijkstra.Image")));
             this.buttonDijkstra.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
-            this.buttonDijkstra.Location = new System.Drawing.Point(835, 287);
+            this.buttonDijkstra.Location = new System.Drawing.Point(835, 410);
             this.buttonDijkstra.Name = "buttonDijkstra";
             this.buttonDijkstra.Padding = new System.Windows.Forms.Padding(15, 0, 0, 0);
-            this.buttonDijkstra.Size = new System.Drawing.Size(146, 34);
+            this.buttonDijkstra.Size = new System.Drawing.Size(146, 43);
             this.buttonDijkstra.TabIndex = 5;
             this.buttonDijkstra.Text = "Aceptar";
             this.buttonDijkstra.UseCompatibleTextRendering = true;
@@ -98,7 +100,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 15.75F, System.Drawing.FontStyle.Bold);
-            this.label1.Location = new System.Drawing.Point(859, 81);
+            this.label1.Location = new System.Drawing.Point(859, 46);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(82, 25);
             this.label1.TabIndex = 6;
@@ -106,19 +108,33 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(835, 373);
+            this.button1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.button1.Image = ((System.Drawing.Image)(resources.GetObject("button1.Image")));
+            this.button1.ImageAlign = System.Drawing.ContentAlignment.MiddleLeft;
+            this.button1.Location = new System.Drawing.Point(835, 513);
             this.button1.Name = "button1";
+            this.button1.Padding = new System.Windows.Forms.Padding(13, 0, 0, 0);
             this.button1.Size = new System.Drawing.Size(146, 41);
             this.button1.TabIndex = 7;
             this.button1.Text = "Reiniciar";
             this.button1.UseVisualStyleBackColor = true;
             this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
+            // label2
+            // 
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(853, 623);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(128, 13);
+            this.label2.TabIndex = 8;
+            this.label2.Text = "Alejandro Campos Alpízar";
+            // 
             // MainWindow
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1039, 652);
+            this.Controls.Add(this.label2);
             this.Controls.Add(this.button1);
             this.Controls.Add(this.label1);
             this.Controls.Add(this.buttonDijkstra);
@@ -127,6 +143,7 @@
             this.Controls.Add(this.Label_Destination);
             this.Controls.Add(this.pictureBox1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
+            this.MaximizeBox = false;
             this.Name = "MainWindow";
             this.Text = "Algoritmia";
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
@@ -144,6 +161,7 @@
         private System.Windows.Forms.Button buttonDijkstra;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Label label2;
     }
 }
 
