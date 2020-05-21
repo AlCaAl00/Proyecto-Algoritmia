@@ -12,45 +12,57 @@ namespace WindowsFormsApp1
 {
     public partial class MainWindow : Form
     {
-        bool cambio;
-        int o, d;
-        List<int> enteros;
+        //Alex
+        GraphTrain Graph;
+        Vertex InitialVertex;
+        Vertex DestinationVertex;
+        Bitmap ImagenOriginal;
+        Bitmap Temp;
+        Dijkstra Dijkstra;
+        //Bitmap BitmapGraph;
+        //Santi
+        //bool cambio;
+        //List<int> enteros;
 
         public MainWindow()
         {
             InitializeComponent();
-            
-            this.cambio = false;
-            this.enteros = new List<int> { 1, 2, 3 };
+            this.Graph = new GraphTrain();
+            this.ImagenOriginal = new Bitmap(pictureBox1.Image);
+            this.Temp = new Bitmap(pictureBox1.Image);
+            this.Dijkstra = new Dijkstra();
             FillComboBox();
         }
 
         private void FillComboBox()
         {
-            foreach (int i in enteros)
+            foreach(Vertex v in Graph.VertexList)
             {
-                combobox_origin.Items.Add(i);
-                combobox_destination.Items.Add(i);
+                combobox_origin.Items.Add(v);
+                combobox_destination.Items.Add(v);
             }
+        }
+
+        private void buttonDijkstra_Click(object sender, EventArgs e)
+        {
+            InitialVertex = (Vertex)combobox_origin.SelectedItem;
+            DestinationVertex = (Vertex)combobox_destination.SelectedItem;
+            Dijkstra.DijkstraAlgorithm(Graph, InitialVertex);
+            List<Vertex> ListTemp = Dijkstra.GetList(DestinationVertex);
+
+            for(int i = 0; i < ListTemp.Count-1; i++)
+            {
+                Graphics.FromImage(Temp).DrawLine(new Pen(Color.Orange, 4), ListTemp[i].Location, ListTemp[i + 1].Location);
+            }
+
+            pictureBox1.Image = Temp;
         }
 
         private void button1_Click(object sender, EventArgs e)
         {
-            panel1.Hide();
-        }
-
-        private void MainWindow_Load(object sender, EventArgs e)
-        {
-
-        }
-
-        private void combobox_origin_SelectedIndexChanged(object sender, EventArgs e)
-        {
-            if (o != 0)
-                combobox_destination.Items.Add(o);
-
-            o = (int)combobox_origin.SelectedItem;
-            combobox_destination.Items.Remove(o);
+            pictureBox1.Image = ImagenOriginal;
+            Temp = new Bitmap(pictureBox1.Image);
+            
         }
     }
 }

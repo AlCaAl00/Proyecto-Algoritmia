@@ -11,45 +11,75 @@ namespace WindowsFormsApp1
     public class GraphTrain
     {
         List<Vertex> IVertexList;
-        Bitmap ImagenOriginal;
-        Bitmap ImagenModificada;
 
-        public GraphTrain(Bitmap bmp)
+        public GraphTrain()
         {
             this.IVertexList = new List<Vertex>
             {
-                new Vertex("Alemania", new Point(530, 327)),
-                new Vertex("Holanda", new Point(1, 1))
+                new Vertex("España", new Point(100, 537)),  //0
+                new Vertex("Francia", new Point(201, 354)), //1
+                new Vertex("Italia", new Point(419, 456)),  //2
+                new Vertex("Belgica", new Point(263, 228)), //3
+                new Vertex("Austria", new Point(506, 331)), //4
+                new Vertex("Grecia", new Point(659, 578)),  //5
+                new Vertex("Rumania", new Point(753, 381)), //6
+                new Vertex("Polonia", new Point(646, 231)), //7
+                new Vertex("Alemania", new Point(412, 177)), //8
+                new Vertex("Dinamarca", new Point(375, 16)), //9
             };
 
-            // Alemania 0
-            IVertexList[0].AddEdge(new Edge(1000, IVertexList[1]));
-            IVertexList[0].AddEdge(new Edge(1000, IVertexList[2]));
+            // España 0
+            IVertexList[0].AddEdge(new Edge(800, IVertexList[1]));
 
-            // Holanda 1
+            // Francia 1
+            IVertexList[1].AddEdge(new Edge(800, IVertexList[0]));
+            IVertexList[1].AddEdge(new Edge(956, IVertexList[2]));
+            IVertexList[1].AddEdge(new Edge(503, IVertexList[3]));
 
+            // Italia 2
+            IVertexList[2].AddEdge(new Edge(800, IVertexList[1]));
+            IVertexList[2].AddEdge(new Edge(646, IVertexList[4]));
 
-            // Bélgica 2
+            //Belgica 3
+            IVertexList[3].AddEdge(new Edge(503, IVertexList[1]));
+            IVertexList[3].AddEdge(new Edge(426, IVertexList[8]));
 
+            //Austria 4
+            IVertexList[4].AddEdge(new Edge(646, IVertexList[2]));
+            IVertexList[4].AddEdge(new Edge(1105, IVertexList[5]));
+            IVertexList[4].AddEdge(new Edge(590, IVertexList[7]));
+            IVertexList[4].AddEdge(new Edge(502, IVertexList[8]));
 
+            //Grecia 5
+            IVertexList[5].AddEdge(new Edge(1105, IVertexList[4]));
+            IVertexList[5].AddEdge(new Edge(805, IVertexList[6]));
 
+            //Rumania 6
+            IVertexList[6].AddEdge(new Edge(805, IVertexList[5]));
+            IVertexList[6].AddEdge(new Edge(787, IVertexList[7]));
+
+            //Polonia 7
+            IVertexList[7].AddEdge(new Edge(590, IVertexList[4]));
+            IVertexList[7].AddEdge(new Edge(787, IVertexList[6]));
+            IVertexList[7].AddEdge(new Edge(606, IVertexList[8]));
+
+            //Alemania 8
+            IVertexList[8].AddEdge(new Edge(426, IVertexList[3]));
+            IVertexList[8].AddEdge(new Edge(502, IVertexList[4]));
+            IVertexList[8].AddEdge(new Edge(606, IVertexList[7]));
+            IVertexList[8].AddEdge(new Edge(570, IVertexList[9]));
+
+            //Dinamarca 9
+            IVertexList[9].AddEdge(new Edge(570, IVertexList[8]));
         }
 
-        public void DrawRoutes()
-        {
-            Graphics.FromImage(ImagenModificada).DrawLine(new Pen(Color.Black, 4), IVertexList[0].Location, IVertexList[2].Location);
-            
-            foreach (Edge edge in IVertexList[0].GetEdges())
-                Graphics.FromImage(ImagenModificada).DrawLine(new Pen(Color.Black, 4), IVertexList[0].Location, edge.Destination.Location);
 
-            Graphics.FromImage(ImagenModificada).FillEllipse(new SolidBrush(Color.Black), IVertexList[0].Location.X - 15, IVertexList[0].Location.Y - 15, 30, 30);
-        }
-
-
-        public List<Vertex> Graph
+        public List<Vertex> VertexList
         {
             get { return this.IVertexList; }
         }
+
+        
 
     }
 
@@ -85,6 +115,11 @@ namespace WindowsFormsApp1
         {
             get { return this.ILocation; }
         }
+
+        public override string ToString()
+        {
+            return this.IName;
+        }
     }
 
     public class Edge
@@ -107,6 +142,161 @@ namespace WindowsFormsApp1
         {
             get { return this.IDestination; }
         }
+    }
+
+    public class Dijkstra
+    {
+        List<Vertex> Selections;
+        List<DijkstraElement> VD;
+        GraphTrain Graph;
+        Vertex InitialVertex;
+        Vertex v_d;
+
+
+        public void DijkstraAlgorithm(GraphTrain graph, Vertex initialVertex)
+        {
+            this.Selections = new List<Vertex>();
+            this.VD = new List<DijkstraElement>();
+            this.Graph = graph;
+            this.InitialVertex = initialVertex;
+
+            ClearDijkstra();
+
+            foreach (Vertex v in Graph.VertexList)
+            {
+                if (v.Name != InitialVertex.Name)
+                    VD.Add(new DijkstraElement(v, false, Double.MaxValue));
+                else
+                    VD.Add(new DijkstraElement(v, false, 0, v));    
+            }
+
+            while(!IsSolution())
+            {
+                v_d = SelectDefinitve();
+                if(v_d == null)
+                {
+                    break;
+                }
+                UpdateVD();
+                Selections.Add(v_d);
+            }
+        }
+
+        public void ClearDijkstra()
+        {
+            VD.Clear();
+            Selections.Clear();
+        }
+
+        public Vertex SelectDefinitve()
+        {
+            Vertex temp = null;
+            double wtemp =  Double.MaxValue;
+            foreach(DijkstraElement element in VD)
+            {
+                if(element.definitive == false)
+                {
+                    if(element.weight < wtemp)
+                    {
+                        temp = element.ID;
+                        wtemp = element.weight;
+                    }
+                }
+            }
+            return temp;
+        }
+
+        public void UpdateVD()
+        {
+            double totalWeight;
+            DijkstraElement origen =  null;
+            DijkstraElement destino =  null;
+            foreach (Edge edge in v_d.GetEdges())
+            {
+                foreach(DijkstraElement element in VD)
+                {
+                    if(element.ID.Name == v_d.Name)
+                    {
+                        origen = element;
+                    }
+                    if(element.ID.Name == edge.Destination.Name)
+                    {
+                        destino = element;
+                    }
+                }
+                if(destino.definitive == false)
+                {
+                    totalWeight = origen.weight + edge.Distance;
+                    if(totalWeight < destino.weight)
+                    {
+                        destino.weight = totalWeight;
+                        destino.P = v_d;
+                    }
+                }
+            }
+        }
+
+        public bool IsSolution()
+        {
+            foreach(Vertex v in Selections)
+            {
+                foreach(DijkstraElement d in VD)
+                {
+                    if(d.ID.Name == v.Name)
+                    {
+                        d.definitive = true;
+                    }
+                }
+            }
+            foreach (DijkstraElement d in VD)
+                if (d.definitive == false)
+                    return false;
+            return true;
+        }
+
+        public List<Vertex> GetList(Vertex destination)
+        {
+            List<Vertex> path = new List<Vertex> { destination };
+            Vertex temp = destination;
+
+            while(temp.Name != InitialVertex.Name)
+            {
+                temp = GetP(temp);
+                path.Add(temp);
+            }
+
+            path.Reverse();
+            return path;
+        }
+
+        public Vertex GetP(Vertex vertex)
+        {
+            foreach(DijkstraElement d in VD)
+            {
+                if(d.ID.Name == vertex.Name)
+                {
+                    return d.P;
+                }
+            }
+            return null;
+        }
+
+    }
+    public class DijkstraElement
+    {
+        public Vertex P { set; get; }
+        public Vertex ID { set; get; }
+        public bool definitive { set; get; }
+        public double weight { set; get; }
+
+        public DijkstraElement(Vertex ID, bool definitive, double weight, Vertex P = null)
+        {
+            this.ID = ID;
+            this.definitive = definitive;
+            this.weight = weight;
+            this.P = P;
+        }
+
     }
 
 }
